@@ -3,3 +3,10 @@
     right:56px;
     bottom:56px;
 }
+
+.ändern{
+    font-weight:bold;
+    &:hover{
+        cursor:pointer;
+    }
+}

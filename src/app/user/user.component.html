@@ -1,5 +1,31 @@
+<ul>
+    @for (item of firebase.UserList; track item) {
+    <li>
+        <div>
+            <div>
+                Name: {{ item['firstName'] }}
+            </div>
+            <div>
+                Lastname: {{ item['lastName']}}
+            </div>
+            <div>
+                Birthday: {{ item['birthDate']}}
+            </div>
+            <div>
+                Street: {{ item['street']}}
+            </div>
+            <div>
+                City: {{ item['zipCode']}} {{ item['city']}}
+            </div>
+        </div>
+        <div class="ändern" (click)="changeData(item)">ändern</div>
+    </li>
+    }
+</ul>
+
 <div class="button-container">
-    <button (click)="openDialog()" mat-fab class="add-user-button" color="primary" matTooltip="add user" matTooltipPosition="above">
+    <button (click)="openDialog()" mat-fab class="add-user-button" color="primary" matTooltip="add user"
+        matTooltipPosition="above">
         <mat-icon>add</mat-icon>
     </button>
 </div>
