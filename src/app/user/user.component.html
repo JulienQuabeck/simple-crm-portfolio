@@ -1,3 +1,6 @@
+<input type="text" placeholder="search for User">
+<button>Search</button>
+
 <ul>
     @for (item of firebase.UserList; track item) {
     <li>
@@ -18,8 +21,20 @@
                 City: {{ item['zipCode']}} {{ item['city']}}
             </div>
         </div>
-        <div class="ändern" (click)="changeData(item)">ändern</div>
-        <div class="ändern" (click)="deleteData(item)">delete</div>
+        <div class="buttons-container">
+            <div class="ändern">
+                <button mat-icon-button class="menu-icon" (click)="changeData(item)" matTooltip="change data"
+                matTooltipPosition="above">
+                    <mat-icon>change_circle</mat-icon>
+                </button>
+            </div>
+            <div class="ändern">
+                <button mat-icon-button class="menu-icon" (click)="deleteData(item)" matTooltip="delete user"
+                matTooltipPosition="above">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+        </div>
     </li>
     }
 </ul>

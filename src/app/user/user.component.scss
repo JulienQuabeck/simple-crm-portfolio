@@ -10,3 +10,17 @@
         cursor:pointer;
     }
 }
+
+li{
+    list-style-type: none;
+    box-shadow:1px 1px 2px black;
+    margin-top:16px;
+}
+
+
+
+.buttons-container{
+    display:flex;
+    gap:20px;
+    width:100%;
+}
