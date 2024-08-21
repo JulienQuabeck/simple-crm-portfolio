@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { addDoc, collection, doc, Firestore, onSnapshot, updateDoc } from '@angular/fire/firestore';
+import { addDoc, collection, deleteDoc, doc, Firestore, onSnapshot, updateDoc } from '@angular/fire/firestore';
 import { User } from '../../models/user.class';
 
 @Injectable({
@@ -10,6 +10,8 @@ export class FirebaseService {
   unsubList;
   // unsubSingle;
   UserList: User[] = [];
+
+  colId: string = "";
 
   constructor() {
 
@@ -51,8 +53,21 @@ export class FirebaseService {
       }
     ).then(
       (docRef) => {
-        console.log("Document written with ID: ", docRef?.id);
+        console.log("Document written with ID: ", docRef?.id);//colID
+        this.addingdocRefToUser(item, docRef?.id);
       }
+    )
+  }
+
+  /**
+   * This function adds the firebase docId as Element ID of the user
+   * @param item the User Object
+   * @param docId firebase document ID 
+   */
+  async addingdocRefToUser(item: any, docId: any) {
+    item.id = docId;
+    await updateDoc(this.getSingleUserRef("users", docId), item).catch(
+      (err) => { console.log(err); }
     )
   }
 
@@ -76,6 +91,7 @@ export class FirebaseService {
    */
   setUserObject(obj: any): User {
     return {
+      id: obj.id || "", //test
       firstName: obj.firstName || "",
       lastName: obj.lastName || "",
       birthDate: obj.birthDate || "",
@@ -93,11 +109,43 @@ export class FirebaseService {
     // this.unsubSingle();
   }
 
+  /**
+   * This function updates the user data
+   * @param user user data
+   */
   async updateUser(user: User) {
-    // if (user.firstName && user.lastName) {
-    //   await updateDoc(this.getSingleUserRef("users", docId), User).catch(
-    //     (err) => { console.log(err); }
-    //   )
-    // }
+      if (user.firstName && user.lastName) {        
+        await updateDoc(this.getSingleUserRef("users", user.id), this.getCleanJson(user)).catch(
+          (err) => { console.log(err); }
+        )
+      }
+  }
+
+  /**
+   * This function creates a clean Json from the user data
+   * @param user 
+   * @returns user data as Json
+   */
+  getCleanJson(user: User):{}{
+    return {
+      id: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      birthDate: user.birthDate,
+      street: user.street,
+      zipCode: user.zipCode,
+      city: user.city
+    }
+  }
+
+  /**
+   * This function deletes a User
+   * @param userdata userdata
+   */
+  async deleteUser(userdata: any){
+    const docRef = doc(this.firestore, "users", userdata.id);
+    await deleteDoc(docRef).catch((err) => {
+      console.log(err);
+    });
   }
 }

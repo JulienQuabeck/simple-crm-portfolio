@@ -1,0 +1,49 @@
+<h2 mat-dialog-title>Update User</h2>
+<mat-dialog-content>
+    <div>
+        <mat-form-field appearance="outline">
+            <mat-label>First name</mat-label>
+            <input [(ngModel)]="data.firstName" matInput placeholder="First name">
+            <!-- <mat-hint>Please enter your name</mat-hint> -->
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Last name</mat-label>
+            <input [(ngModel)]="data.lastName" matInput placeholder="Last name">
+            <!-- <mat-hint>Please enter your last name</mat-hint> -->
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field>
+            <mat-label>Choose a date</mat-label>
+            <input [(ngModel)]="data.birthDate" matInput [matDatepicker]="picker">
+            <!-- <mat-hint>DD/MM/YYYY</mat-hint> -->
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field appearance="outline">
+            <mat-label>Street + HouseNo.</mat-label>
+            <input [(ngModel)]="data.street" matInput placeholder="Street + HouseNo.r">
+            <!-- <mat-hint>Please enter an Adress</mat-hint> -->
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field appearance="outline">
+            <mat-label>Zip code</mat-label>
+            <input [(ngModel)]="data.zipCode" matInput placeholder="Zip code">
+            <!-- <mat-hint>Please enter an Adress</mat-hint> -->
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>City</mat-label>
+            <input [(ngModel)]="data.city" matInput placeholder="City">
+            <!-- <mat-hint>Please enter an Adress</mat-hint> -->
+        </mat-form-field>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+    <button mat-button [mat-dialog-close]="true" (click)="saveUpdates()">Save</button>
+</mat-dialog-actions>

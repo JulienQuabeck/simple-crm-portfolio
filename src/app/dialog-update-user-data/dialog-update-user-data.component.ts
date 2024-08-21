@@ -1,6 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component, Inject, inject } from '@angular/core';
 import { MatDatepicker, MatDatepickerToggle, MatDatepickerModule } from '@angular/material/datepicker';
-import { MatDialogActions, MatDialogContent, MatDialogModule } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogActions, MatDialogContent, MatDialogModule } from '@angular/material/dialog';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
@@ -8,9 +8,8 @@ import { User } from '../../models/user.class';
 import { MAT_DATE_LOCALE, MatNativeDateModule, provideNativeDateAdapter } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { FirebaseService } from '../firebase-services/firebase.service';
-
 @Component({
-  selector: 'app-dialog-add-user',
+  selector: 'app-dialog-update-user-data',
   standalone: true,
   imports: [
     MatDatepicker, 
@@ -26,24 +25,30 @@ import { FirebaseService } from '../firebase-services/firebase.service';
     MatNativeDateModule, 
     MatButtonModule
   ],
-  providers: [
-    provideNativeDateAdapter(),
-    { provide: MAT_DATE_LOCALE, useValue: 'de-DE' },
-  ],
-  templateUrl: './dialog-add-user.component.html',
-  styleUrl: './dialog-add-user.component.scss'
+  templateUrl: './dialog-update-user-data.component.html',
+  styleUrl: './dialog-update-user-data.component.scss'
 })
-export class DialogAddUserComponent {
+export class DialogUpdateUserDataComponent {
 
-  user: User = new User();
+  user: User = new User;
 
-  constructor(public firebase: FirebaseService) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public firebase: FirebaseService){  
   }
 
-  saveUserData: any;
-
-  saveUser() {
-    this.saveUserData = this.firebase.setUserObject(this.user);  
-    this.firebase.addUser(this.saveUserData);  
+  creatingUpdatedUser(){
+    return {
+      id: this.data.id,
+      firstName: this.data.firstName,
+      lastName: this.data.lastName,
+      birthDate: this.data.birthDate,
+      street: this.data.street,
+      zipCode: this.data.zipCode,
+      city: this.data.city
+    }
   }
+
+  saveUpdates(){  
+    this.firebase.updateUser(this.creatingUpdatedUser());  
+  }
+
 }

@@ -6,6 +6,9 @@ import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { DialogAddUserComponent } from '../dialog-add-user/dialog-add-user.component';
 import { CommonModule } from '@angular/common';
 import { FirebaseService } from '../firebase-services/firebase.service';
+import { DialogUpdateUserDataComponent } from '../dialog-update-user-data/dialog-update-user-data.component';
+import { deleteDoc, doc, Firestore } from '@angular/fire/firestore';
+
 
 
 @Component({
@@ -17,7 +20,7 @@ import { FirebaseService } from '../firebase-services/firebase.service';
 })
 export class UserComponent {
 
-  constructor(public dialog: MatDialog, public firebase: FirebaseService) {
+  constructor(public dialog: MatDialog, public firebase: FirebaseService, private firestore: Firestore) {
 
   }
 
@@ -28,7 +31,21 @@ export class UserComponent {
     this.dialog.open(DialogAddUserComponent);
   }
 
-  changeData(item:any){
-    console.log(item);
+  /**
+   * This function opens the data update dialog
+   * @param userdata all user data
+   */
+  changeData(userdata: any) {
+    this.dialog.open(DialogUpdateUserDataComponent, {
+      data: userdata
+    });
+  }
+
+  /**
+   * This function starts the deleteData-function of the firebase.service.ts
+   * @param userdata user data
+   */
+  async deleteData(userdata: any) {
+    this.firebase.deleteUser(userdata);
   }
 }
