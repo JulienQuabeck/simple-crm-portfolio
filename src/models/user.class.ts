@@ -2,6 +2,7 @@ export class User{
     id:string; //test
     firstName: string;
     lastName: string;
+    mail:string;
     birthDate: Date;
     street: string;
     zipCode: number;
@@ -11,6 +12,7 @@ export class User{
         this.id = obj ? obj.id: "";
         this.firstName = obj ? obj.firstName: '';
         this.lastName = obj? obj.lastName: '';
+        this.mail = obj? obj.mail: '';
         this.birthDate = obj ? obj.birthDate: '';
         this.street = obj ? obj.street: '';
         this.zipCode = obj ? obj.zipCode: '';

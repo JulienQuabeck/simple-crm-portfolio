@@ -8,11 +8,14 @@ import { User } from '../../models/user.class';
 import { MAT_DATE_LOCALE, MatNativeDateModule, provideNativeDateAdapter } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { FirebaseService } from '../firebase-services/firebase.service';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-dialog-add-user',
   standalone: true,
   imports: [
+    CommonModule,
     MatDatepicker, 
     MatDatepickerToggle, 
     MatDatepickerModule, 
@@ -24,7 +27,8 @@ import { FirebaseService } from '../firebase-services/firebase.service';
     MatInputModule, 
     FormsModule, 
     MatNativeDateModule, 
-    MatButtonModule
+    MatButtonModule,
+    MatProgressBarModule
   ],
   providers: [
     provideNativeDateAdapter(),
@@ -36,6 +40,7 @@ import { FirebaseService } from '../firebase-services/firebase.service';
 export class DialogAddUserComponent {
 
   user: User = new User();
+  loading = false;
 
   constructor(public firebase: FirebaseService) {
   }
@@ -43,7 +48,9 @@ export class DialogAddUserComponent {
   saveUserData: any;
 
   saveUser() {
+    this.loading = true;
     this.saveUserData = this.firebase.setUserObject(this.user);  
     this.firebase.addUser(this.saveUserData);  
+    this.loading = false;
   }
 }

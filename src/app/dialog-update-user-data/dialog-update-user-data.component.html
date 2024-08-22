@@ -14,6 +14,12 @@
     </div>
     <div>
         <mat-form-field>
+            <mat-label>E-Mail</mat-label>
+            <input [(ngModel)]="data.mail" matInput placeholder="E-Mail">
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field>
             <mat-label>Choose a date</mat-label>
             <input [(ngModel)]="data.birthDate" matInput [matDatepicker]="picker">
             <!-- <mat-hint>DD/MM/YYYY</mat-hint> -->

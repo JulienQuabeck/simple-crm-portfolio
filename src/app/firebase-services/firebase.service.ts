@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { addDoc, collection, deleteDoc, doc, Firestore, onSnapshot, updateDoc } from '@angular/fire/firestore';
+import { addDoc, collection, deleteDoc, doc, Firestore, limit, onSnapshot, orderBy, query, updateDoc } from '@angular/fire/firestore';
 import { User } from '../../models/user.class';
 
 @Injectable({
@@ -76,7 +76,8 @@ export class FirebaseService {
    * @returns the collection data
    */
   subUserList() {
-    return onSnapshot(this.getUserRef(), (list) => {
+    const q = query(this.getUserRef(), orderBy('lastName'), limit(10));
+    return onSnapshot(q, (list) => {
       this.UserList = []
       list.forEach(element => {
         this.UserList.push(this.setUserObject(element.data()));
@@ -91,9 +92,10 @@ export class FirebaseService {
    */
   setUserObject(obj: any): User {
     return {
-      id: obj.id || "", //test
+      id: obj.id || "",
       firstName: obj.firstName || "",
       lastName: obj.lastName || "",
+      mail: obj.mail ||"",
       birthDate: obj.birthDate || "",
       street: obj.street || "",
       zipCode: obj.zipCode || "",

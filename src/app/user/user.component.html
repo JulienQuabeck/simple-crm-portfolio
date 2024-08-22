@@ -1,43 +1,70 @@
-<input type="text" placeholder="search for User">
-<button>Search</button>
-
-<ul>
+<!-- <ul>
     @for (item of firebase.UserList; track item) {
     <li>
-        <div>
-            <div>
-                Name: {{ item['firstName'] }}
+        <mat-list-item>
+            <mat-icon class="icon-display" matListItemIcon>person</mat-icon>
+            <div class="data">
+                <div matListItemTitle><b>First name: </b><br />{{item['firstName']}}</div>
+                <div matListItemLine><b>Last name: </b><br />{{item['lastName']}}</div>
+                <div matListItemLine><b>Birthday: </b><br />{{item['birthDate']}}</div>
+                <div matListItemLine><b>adress: </b><br /> {{item['street']}}<br />{{item['zipCode']}}, {{item['city']}}
+                </div>
+                <div class="buttons-container">
+                    <div class="ändern">
+                        <button mat-icon-button class="menu-icon" (click)="changeData(item)" matTooltip="change data"
+                            matTooltipPosition="above">
+                            <mat-icon>change_circle</mat-icon>
+                        </button>
+                    </div>
+                    <div class="ändern">
+                        <button mat-icon-button class="menu-icon" (click)="deleteData(item)" matTooltip="delete user"
+                            matTooltipPosition="above">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </div>
+                </div>
             </div>
-            <div>
-                Lastname: {{ item['lastName']}}
-            </div>
-            <div>
-                Birthday: {{ item['birthDate']}}
-            </div>
-            <div>
-                Street: {{ item['street']}}
-            </div>
-            <div>
-                City: {{ item['zipCode']}} {{ item['city']}}
-            </div>
-        </div>
-        <div class="buttons-container">
-            <div class="ändern">
-                <button mat-icon-button class="menu-icon" (click)="changeData(item)" matTooltip="change data"
-                matTooltipPosition="above">
-                    <mat-icon>change_circle</mat-icon>
-                </button>
-            </div>
-            <div class="ändern">
-                <button mat-icon-button class="menu-icon" (click)="deleteData(item)" matTooltip="delete user"
-                matTooltipPosition="above">
-                    <mat-icon>delete</mat-icon>
-                </button>
-            </div>
-        </div>
+        </mat-list-item>
     </li>
     }
-</ul>
+</ul> -->
+<div class="user-list-container">
+    <mat-card>
+        <table class="user-table">
+            <tr>
+                <th>Name</th>
+                <th>E-Mail</th>
+                <th>Birthday</th>
+                <th>Street</th>
+                <th>ZipCode</th>
+                <th>City</th>
+            </tr>
+            <!-- @for (item of firebase.UserList; track item) { -->
+            <!-- <tr (click)="changeData(item)"> -->
+            <tr *ngFor="let item of firebase.UserList" [routerLink]="['/user/' + item.id]">
+                <td>{{item['firstName']}} {{item['lastName']}}</td>
+                <td>{{item['mail']}}</td>
+                <td>{{item['birthDate']}}</td>
+                <td>{{item['street']}}</td>
+                <td>{{item['zipCode']}}</td>
+                <td>{{item['city']}}</td>
+                <td> <button mat-icon-button class="menu-icon" (click)="deleteData(item, $event)" matTooltip="delete user"
+                        matTooltipPosition="above">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </td>
+            </tr>
+            <!-- } -->
+        </table>
+    </mat-card>
+
+
+
+    @for (item of firebase.UserList; track item) {
+
+    }
+</div>
+
 
 <div class="button-container">
     <button (click)="openDialog()" mat-fab class="add-user-button" color="primary" matTooltip="add user"

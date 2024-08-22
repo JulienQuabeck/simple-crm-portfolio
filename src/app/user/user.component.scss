@@ -1,26 +1,98 @@
-.add-user-button{
-    position:absolute;
-    right:56px;
-    bottom:56px;
+mat-list-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
 }
 
-.ändern{
-    font-weight:bold;
-    &:hover{
-        cursor:pointer;
+mat-card {
+    padding: 0;
+}
+
+.user-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.user-table {
+    border-collapse: collapse;
+
+    tr {
+        &:hover {
+            cursor: pointer;
+            background-color: rgba(0, 0, 0, 0.04);
+        }
+
+        &:first-child {
+            cursor: unset;
+            &:hover{
+                background-color: unset;
+            }
+        }
+
+        &:last-child td {
+            border-bottom: 0;
+        }
+
+        td {
+            text-align: start;
+            height: 48px;
+            border-bottom: 1px solid gray;
+
+            &:first-child {
+                padding-left: 16px;
+            }
+        }
+    }
+
+    th {
+        color: rgba(0, 0, 0, 0.4);
+        font-weight: 500px;
+        font-size: 14px;
+        text-align: start;
+        border-bottom:1px solid gray;
+
+        &:first-child {
+            padding-left: 16px;
+        }
     }
 }
 
-li{
-    list-style-type: none;
-    box-shadow:1px 1px 2px black;
-    margin-top:16px;
+.data {
+    padding: 8px;
 }
 
+.icon-display {
+    margin-left: 16px;
+    transform: scale(2);
+}
 
+.add-user-button {
+    position: absolute;
+    right: 56px;
+    bottom: 56px;
+}
 
-.buttons-container{
-    display:flex;
-    gap:20px;
-    width:100%;
+.ändern {
+    font-weight: bold;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+li {
+    list-style-type: none;
+    box-shadow: 1px 1px 10px rgb(71, 88, 184);
+    margin-top: 16px;
+
+    &:hover {
+        box-shadow: 1px 1px 20px rgb(71, 88, 184);
+    }
+}
+
+.buttons-container {
+    display: flex;
+    gap: 20px;
+    width: 100%;
 }

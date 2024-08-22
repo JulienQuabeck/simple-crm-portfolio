@@ -8,10 +8,12 @@ import { User } from '../../models/user.class';
 import { MAT_DATE_LOCALE, MatNativeDateModule, provideNativeDateAdapter } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { FirebaseService } from '../firebase-services/firebase.service';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-dialog-update-user-data',
   standalone: true,
   imports: [
+    CommonModule,
     MatDatepicker, 
     MatDatepickerToggle, 
     MatDatepickerModule, 
@@ -40,6 +42,7 @@ export class DialogUpdateUserDataComponent {
       id: this.data.id,
       firstName: this.data.firstName,
       lastName: this.data.lastName,
+      mail: this.data.mail,
       birthDate: this.data.birthDate,
       street: this.data.street,
       zipCode: this.data.zipCode,
