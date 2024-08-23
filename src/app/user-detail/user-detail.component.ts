@@ -2,29 +2,52 @@ import { Component } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { ActivatedRoute } from '@angular/router';
 import { FirebaseService } from '../firebase-services/firebase.service';
-import { Firestore } from '@angular/fire/firestore';
+import { Firestore, getDoc } from '@angular/fire/firestore';
+import { User } from '../../models/user.class';
+import { MatIcon } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import {MatMenuModule} from '@angular/material/menu';
 
 @Component({
   selector: 'app-user-detail',
   standalone: true,
-  imports: [MatCardModule],
+  imports: [MatCardModule, MatIcon, MatButtonModule, MatMenuModule],
   templateUrl: './user-detail.component.html',
   styleUrl: './user-detail.component.scss'
 })
 export class UserDetailComponent {
 
   userId: string | null = '';
-  user: any = {};
+  user: User = new User;
 
-  constructor(private router: ActivatedRoute, public firebase: FirebaseService, private firestore: Firestore) { 
+  constructor(private router: ActivatedRoute, public firebase: FirebaseService, private firestore: Firestore) {
     this.router.paramMap.subscribe(paramMap => {
       this.userId = paramMap.get('id');
-      if(this.userId){
-        this.user = this.firebase.getSingleUserRef('users', this.userId), this.firebase.getCleanJson(this.user);
-        console.log(this.user.firstName);
-        
+      if (this.userId) {
+        const userRef = this.firebase.getSingleUserRef('users', this.userId);
+        getDoc(userRef).then(docSnapshot => {
+          if (docSnapshot.exists()) {
+            this.user = new User(docSnapshot.data());
+            console.log(this.user); // Hier siehst du die Daten des Benutzers
+          } else {
+            console.log('No such document!');
+          }
+        }).catch(error => {
+          console.error("Error getting document:", error);
+        });
       }
-    })
-   }
+    });
+  }
 
+  openEditAddressDialog(){
+
+  }
+
+  openEditBirthdayDialog(){
+
+  }
+
+  openEditHeaderDialog(){
+    
+  }
 }
