@@ -1,4 +1,5 @@
 export class User{
+
     id:string; //test
     firstName: string;
     lastName: string;
@@ -7,6 +8,8 @@ export class User{
     street: string;
     zipCode: number;
     city: string
+
+    
 
     constructor(obj?:any){
         this.id = obj ? obj.id: "";
@@ -18,4 +21,8 @@ export class User{
         this.zipCode = obj ? obj.zipCode: '';
         this.city = obj ? obj.city: '';
     }
+
+    // toJSON(): any {
+    //   throw new Error('Method not implemented.');
+    // }
 }

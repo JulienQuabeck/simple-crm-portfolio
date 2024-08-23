@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { User } from '../../models/user.class';
 import { MatButtonModule } from '@angular/material/button';
 import { FirebaseService } from '../firebase-services/firebase.service';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -32,12 +32,19 @@ import { CommonModule } from '@angular/common';
 })
 export class DialogEditAddressComponent {
   loading = false;
-  user: User;
+  user: any;
 
+  constructor(private firebase: FirebaseService) {
 
+  }
 
-  saveUser(){
+  changes: any;
+  changedUser: any;
 
+  async saveUser() {
+    this.loading = true;
+    this.firebase.updateUser(this.user); //.toJSON()
+    this.loading = false;
   }
 
 }

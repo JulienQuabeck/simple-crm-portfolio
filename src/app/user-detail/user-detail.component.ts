@@ -6,7 +6,7 @@ import { Firestore, getDoc } from '@angular/fire/firestore';
 import { User } from '../../models/user.class';
 import { MatIcon } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import {MatMenuModule} from '@angular/material/menu';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogEditAddressComponent } from '../dialog-edit-address/dialog-edit-address.component';
 import { DialogEditBirthdayComponent } from '../dialog-edit-birthday/dialog-edit-birthday.component';
@@ -24,10 +24,10 @@ export class UserDetailComponent {
   userId: string | null = '';
   user: User = new User;
 
-  constructor(private router: ActivatedRoute, 
-    public firebase: FirebaseService, 
-    private firestore: Firestore, 
-    public dialog:MatDialog) {
+  constructor(private router: ActivatedRoute,
+    public firebase: FirebaseService,
+    private firestore: Firestore,
+    public dialog: MatDialog) {
 
     this.router.paramMap.subscribe(paramMap => {
       this.userId = paramMap.get('id');
@@ -46,18 +46,18 @@ export class UserDetailComponent {
     });
   }
 
-  openEditAddressDialog(){
+  openEditAddressDialog() {
     const dialog = this.dialog.open(DialogEditAddressComponent);
-    dialog.componentInstance.user = this.user;
+    dialog.componentInstance.user = new User(this.user);
   }
 
-  openEditBirthdayDialog(){
+  openEditBirthdayDialog() {
     const dialog = this.dialog.open(DialogEditBirthdayComponent);
-    dialog.componentInstance.user = this.user;
+    dialog.componentInstance.user = new User(this.user);
   }
 
-  openEditHeaderDialog(){
+  openEditHeaderDialog() {
     const dialog = this.dialog.open(DialogEditUserHeaderComponent);
-    dialog.componentInstance.user = this.user;
+    dialog.componentInstance.user = new User(this.user);
   }
 }
