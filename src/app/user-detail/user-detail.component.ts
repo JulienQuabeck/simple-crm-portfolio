@@ -7,6 +7,10 @@ import { User } from '../../models/user.class';
 import { MatIcon } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import {MatMenuModule} from '@angular/material/menu';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogEditAddressComponent } from '../dialog-edit-address/dialog-edit-address.component';
+import { DialogEditBirthdayComponent } from '../dialog-edit-birthday/dialog-edit-birthday.component';
+import { DialogEditUserHeaderComponent } from '../dialog-edit-user-header/dialog-edit-user-header.component';
 
 @Component({
   selector: 'app-user-detail',
@@ -20,7 +24,11 @@ export class UserDetailComponent {
   userId: string | null = '';
   user: User = new User;
 
-  constructor(private router: ActivatedRoute, public firebase: FirebaseService, private firestore: Firestore) {
+  constructor(private router: ActivatedRoute, 
+    public firebase: FirebaseService, 
+    private firestore: Firestore, 
+    public dialog:MatDialog) {
+
     this.router.paramMap.subscribe(paramMap => {
       this.userId = paramMap.get('id');
       if (this.userId) {
@@ -28,7 +36,6 @@ export class UserDetailComponent {
         getDoc(userRef).then(docSnapshot => {
           if (docSnapshot.exists()) {
             this.user = new User(docSnapshot.data());
-            console.log(this.user); // Hier siehst du die Daten des Benutzers
           } else {
             console.log('No such document!');
           }
@@ -40,14 +47,17 @@ export class UserDetailComponent {
   }
 
   openEditAddressDialog(){
-
+    const dialog = this.dialog.open(DialogEditAddressComponent);
+    dialog.componentInstance.user = this.user;
   }
 
   openEditBirthdayDialog(){
-
+    const dialog = this.dialog.open(DialogEditBirthdayComponent);
+    dialog.componentInstance.user = this.user;
   }
 
   openEditHeaderDialog(){
-    
+    const dialog = this.dialog.open(DialogEditUserHeaderComponent);
+    dialog.componentInstance.user = this.user;
   }
 }
