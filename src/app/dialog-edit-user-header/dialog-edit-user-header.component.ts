@@ -33,7 +33,7 @@ import { FirebaseService } from '../firebase-services/firebase.service';
 })
 export class DialogEditUserHeaderComponent {
 
-  user: any;
+  user: User = new User;
   loading = false;
 
   constructor(private firebase: FirebaseService){

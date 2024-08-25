@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DialogEditUserHeaderComponent } from './dialog-edit-user-header.component';
+import { Firestore, FirestoreModule } from '@angular/fire/firestore';
 
 describe('DialogEditUserHeaderComponent', () => {
   let component: DialogEditUserHeaderComponent;
@@ -8,7 +9,8 @@ describe('DialogEditUserHeaderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DialogEditUserHeaderComponent]
+      imports: [DialogEditUserHeaderComponent],
+      providers:[Firestore, FirestoreModule]
     })
     .compileComponents();
     

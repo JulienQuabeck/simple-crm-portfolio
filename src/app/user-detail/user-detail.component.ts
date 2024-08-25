@@ -27,7 +27,7 @@ export class UserDetailComponent {
   constructor(private router: ActivatedRoute,
     public firebase: FirebaseService,
     private firestore: Firestore,
-    public dialog: MatDialog) {
+    public dialog: MatDialog) {   
 
     this.router.paramMap.subscribe(paramMap => {
       this.userId = paramMap.get('id');

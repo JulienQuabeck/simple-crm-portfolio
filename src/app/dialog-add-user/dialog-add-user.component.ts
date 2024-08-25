@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component} from '@angular/core';
 import { MatDatepicker, MatDatepickerToggle, MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogActions, MatDialogContent, MatDialogModule } from '@angular/material/dialog';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
@@ -47,6 +47,9 @@ export class DialogAddUserComponent {
 
   saveUserData: any;
 
+  /**
+   * This function saves the User data
+   */
   saveUser() {
     this.loading = true;
     this.saveUserData = this.firebase.setUserObject(this.user);  

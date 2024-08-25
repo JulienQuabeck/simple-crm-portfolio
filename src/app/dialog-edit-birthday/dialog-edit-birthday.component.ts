@@ -39,7 +39,7 @@ import { FirebaseService } from '../firebase-services/firebase.service';
 export class DialogEditBirthdayComponent {
   
   loading = false;
-  user: any;
+  user: User = new User;
 
   constructor(private firebase: FirebaseService){
 

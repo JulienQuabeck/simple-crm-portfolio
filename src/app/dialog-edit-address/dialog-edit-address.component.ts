@@ -32,7 +32,7 @@ import { CommonModule } from '@angular/common';
 })
 export class DialogEditAddressComponent {
   loading = false;
-  user: any;
+  user: User = new User;
 
   constructor(private firebase: FirebaseService) {
 
@@ -46,5 +46,4 @@ export class DialogEditAddressComponent {
     this.firebase.updateUser(this.user); //.toJSON()
     this.loading = false;
   }
-
 }

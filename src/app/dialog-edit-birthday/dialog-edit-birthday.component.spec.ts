@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DialogEditBirthdayComponent } from './dialog-edit-birthday.component';
+import { Firestore } from '@angular/fire/firestore';
 
 describe('DialogEditBirthdayComponent', () => {
   let component: DialogEditBirthdayComponent;
@@ -8,7 +9,8 @@ describe('DialogEditBirthdayComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DialogEditBirthdayComponent]
+      imports: [DialogEditBirthdayComponent],
+      providers: [Firestore]
     })
     .compileComponents();
     

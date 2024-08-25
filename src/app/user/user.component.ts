@@ -6,8 +6,6 @@ import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { DialogAddUserComponent } from '../dialog-add-user/dialog-add-user.component';
 import { CommonModule, NgFor } from '@angular/common';
 import { FirebaseService } from '../firebase-services/firebase.service';
-import { DialogUpdateUserDataComponent } from '../dialog-update-user-data/dialog-update-user-data.component';
-import { deleteDoc, doc, Firestore } from '@angular/fire/firestore';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
@@ -37,8 +35,8 @@ import { RouterModule } from '@angular/router';
 })
 export class UserComponent {
 
-  constructor(public dialog: MatDialog, public firebase: FirebaseService, private firestore: Firestore) {
-
+  constructor(public dialog: MatDialog, public firebase: FirebaseService) {
+    
   }
 
   /**
@@ -46,16 +44,6 @@ export class UserComponent {
    */
   openDialog() {
     this.dialog.open(DialogAddUserComponent);
-  }
-
-  /**
-   * This function opens the data update dialog
-   * @param userdata all user data
-   */
-  changeData(userdata: any) {
-    this.dialog.open(DialogUpdateUserDataComponent, {
-      data: userdata
-    });
   }
 
   /**
