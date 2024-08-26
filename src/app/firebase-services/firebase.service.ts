@@ -13,16 +13,13 @@ export class FirebaseService {
 
   colId: string = "";
 
-  constructor() {
+  constructor(private firestore: Firestore) {
 
     this.unsubList = this.subUserList();
-    // this.unsubSingle = onSnapshot(this.getSingleUserRef('users', 'asdhajg2hqehjka'), (element) => {
-
-    // });
 
   }
 
-  firestore: Firestore = inject(Firestore);
+  // firestore: Firestore = inject(Firestore);
 
   /**
    * This function returns the Reference (id) of an item of the collection "User"
