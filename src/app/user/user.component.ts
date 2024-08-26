@@ -10,6 +10,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { RouterModule } from '@angular/router';
+import { FirebaseAppModule } from '@angular/fire/app';
+import { Firestore } from '@angular/fire/firestore';
 
 
 
@@ -28,8 +30,13 @@ import { RouterModule } from '@angular/router';
     MatListModule,
     MatCardModule,
     NgFor,
-    RouterModule
+    RouterModule,
+    FirebaseAppModule
   ],
+  providers: [
+            FirebaseService,
+            { provide: Firestore, useValue: {} }
+          ],
   templateUrl: './user.component.html',
   styleUrl: './user.component.scss'
 })

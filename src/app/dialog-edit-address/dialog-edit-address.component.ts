@@ -9,6 +9,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { FirebaseService } from '../firebase-services/firebase.service';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { CommonModule } from '@angular/common';
+import { FirebaseAppModule } from '@angular/fire/app';
+import { Firestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-dialog-edit-address',
@@ -25,7 +27,12 @@ import { CommonModule } from '@angular/common';
     FormsModule,
     MatButtonModule,
     MatProgressBarModule,
-    CommonModule
+    CommonModule,
+    FirebaseAppModule
+  ],
+  providers: [
+    FirebaseService,
+    { provide: Firestore, useValue: {} }
   ],
   templateUrl: './dialog-edit-address.component.html',
   styleUrl: './dialog-edit-address.component.scss'
