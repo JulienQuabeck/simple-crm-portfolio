@@ -1,7 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DialogEditAddressComponent } from './dialog-edit-address.component';
-import { Firestore } from '@angular/fire/firestore';
+import { Firestore, getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { importProvidersFrom } from '@angular/core';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { firebaseConfig } from '../app.config';
 
 describe('DialogEditAddressComponent', () => {
   let component: DialogEditAddressComponent;
@@ -9,8 +14,17 @@ describe('DialogEditAddressComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DialogEditAddressComponent],
-      providers: [Firestore]
+      imports: [
+        DialogEditAddressComponent,
+        BrowserModule, 
+        BrowserAnimationsModule
+      ],
+      providers: [
+        importProvidersFrom([
+          provideFirebaseApp(() => initializeApp(firebaseConfig)),
+        provideFirestore(() => getFirestore())
+        ]),
+      ]
     })
     .compileComponents();
     

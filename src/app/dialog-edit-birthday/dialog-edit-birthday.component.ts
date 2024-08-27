@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { FirebaseService } from '../firebase-services/firebase.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-dialog-edit-birthday',
@@ -27,7 +28,8 @@ import { FirebaseService } from '../firebase-services/firebase.service';
     FormsModule, 
     MatNativeDateModule, 
     MatButtonModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    CommonModule
   ],
   providers: [
     provideNativeDateAdapter(),

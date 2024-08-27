@@ -1,7 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DialogEditUserHeaderComponent } from './dialog-edit-user-header.component';
-import { Firestore, FirestoreModule } from '@angular/fire/firestore';
+import { Firestore, FirestoreModule, getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { importProvidersFrom } from '@angular/core';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { firebaseConfig } from '../app.config';
 
 describe('DialogEditUserHeaderComponent', () => {
   let component: DialogEditUserHeaderComponent;
@@ -9,8 +14,16 @@ describe('DialogEditUserHeaderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DialogEditUserHeaderComponent],
-      providers:[Firestore, FirestoreModule]
+      imports: [
+        DialogEditUserHeaderComponent,
+        BrowserModule, 
+        BrowserAnimationsModule
+      ],
+      providers:[
+      importProvidersFrom([
+        provideFirebaseApp(() => initializeApp(firebaseConfig)),
+      provideFirestore(() => getFirestore())
+      ]),]
     })
     .compileComponents();
     

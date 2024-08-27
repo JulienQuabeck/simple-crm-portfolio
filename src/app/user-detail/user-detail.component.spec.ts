@@ -3,7 +3,12 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { UserDetailComponent } from './user-detail.component';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
-import { Firestore } from '@angular/fire/firestore';
+import { Firestore, getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
+import { importProvidersFrom } from '@angular/core';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { firebaseConfig } from '../app.config';
 
 describe('UserDetailComponent', () => {
   let component: UserDetailComponent;
@@ -12,16 +17,16 @@ describe('UserDetailComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UserDetailComponent],
-      providers: [Firestore,
-        {
-          provide: ActivatedRoute,
-          useValue: {
-            paramMap: of({
-              get: (param: string) => 'test-id' // hier kannst du eine Test-ID einfügen
-            })
-          }
-        }
+      imports: [
+        UserDetailComponent,
+        BrowserModule, 
+        BrowserAnimationsModule
+      ],
+      providers: [        
+      importProvidersFrom([
+        provideFirebaseApp(() => initializeApp(firebaseConfig)),
+      provideFirestore(() => getFirestore())
+      ]),
       ]
     })
     .compileComponents();
