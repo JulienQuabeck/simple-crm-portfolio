@@ -26,7 +26,6 @@ export class UserDetailComponent {
 
   constructor(private router: ActivatedRoute,
     public firebase: FirebaseService,
-    private firestore: Firestore,
     public dialog: MatDialog) {   
 
     this.router.paramMap.subscribe(paramMap => {
